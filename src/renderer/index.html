@@ -2,16 +2,27 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Electron</title>
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:"
-    />
+    <title>Agent APP Starter</title>
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div id="loading">
+        <script>
+          const Light = '#ffffff'
+          const Dark = '#1f1f1f'
+          const theme = localStorage.getItem('color-theme')
+          let color
+
+          if (theme === 'light') color = Light
+          else if (theme === 'dark') color = Dark
+          else color = window.matchMedia('(prefers-color-scheme: dark)').matches ? Dark : Light
+
+          const loading = document.getElementById('loading')
+          loading.style = `position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: ${color};`
+        </script>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
